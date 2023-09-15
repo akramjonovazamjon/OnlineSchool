@@ -8,6 +8,7 @@ import com.example.onlineschool.mapper.EmployeeMapper;
 import com.example.onlineschool.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,15 +28,16 @@ public class EmployeeController {
             @RequestParam(name = "position") String position,
             @RequestParam(name = "phoneNumber") String phoneNumber,
             @RequestParam(name = "email") String email,
-            @RequestParam(name = "file") MultipartFile file
+            @RequestParam(name = "file") MultipartFile file,
+            @RequestParam(name = "department") String department
     ) throws IOException {
-        Employee employee = service.create(new CreateEmployee(fullName, position, phoneNumber, email, file));
+        Employee employee = service.create(new CreateEmployee(fullName, position, phoneNumber, email, file, department));
         return ResponseData.of(mapper.asEmployeeVm(employee));
     }
 
     @GetMapping
-    public ResponseData<List<EmployeeVm>> getAll(Pageable pageable) {
-        List<Employee> employees = service.getAll(pageable);
+    public ResponseData<List<EmployeeVm>> getAll(Pageable pageable, @Param(value = "department") String department) {
+        List<Employee> employees = service.getAll(pageable, department);
         return ResponseData.of(mapper.asEmployeeList(employees));
     }
 

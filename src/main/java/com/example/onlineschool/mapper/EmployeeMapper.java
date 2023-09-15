@@ -17,6 +17,7 @@ public interface EmployeeMapper {
     @Mapping(target = "phoneNumber", source = "dto.phoneNumber")
     @Mapping(target = "email", source = "dto.email")
     @Mapping(target = "imgUrl", source = "imgUrl")
+    @Mapping(target = "department", source = "dto.department")
     Employee asNewEmployee(CreateEmployee dto, String imgUrl);
 
     EmployeeVm asEmployeeVm(Employee employee);

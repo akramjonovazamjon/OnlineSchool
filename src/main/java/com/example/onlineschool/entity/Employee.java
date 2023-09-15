@@ -23,5 +23,6 @@ public class Employee {
     private String email;
     @Column(name = "img_url")
     private String imgUrl;
+    private String department;
 
 }

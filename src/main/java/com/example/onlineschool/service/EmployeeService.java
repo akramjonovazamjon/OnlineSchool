@@ -52,11 +52,11 @@ public class EmployeeService {
     }
 
     public Employee getById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new EmployeeNotFoundException());
+        return repository.findById(id).orElseThrow(EmployeeNotFoundException::new);
     }
 
-    public List<Employee> getAll(Pageable pageable) {
-        return repository.findAll(pageable).getContent();
+    public List<Employee> getAll(Pageable pageable, String department) {
+        return repository.findAllByDepartment(department, pageable).getContent();
     }
 
     public void delete(Long id) {

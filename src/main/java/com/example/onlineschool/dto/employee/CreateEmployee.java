@@ -7,6 +7,7 @@ public record CreateEmployee(
         String position,
         String phoneNumber,
         String email,
-        MultipartFile file
+        MultipartFile file,
+        String department
 ) {
 }
